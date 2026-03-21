@@ -1,0 +1,22 @@
+Create Their Own .env File
+
+Each member must have their own:
+
+MONGO_URI=your_connection_string
+
+👉 You share the connection string with them
+
+Install Required Libraries
+pip install pymongo python-dotenv
+
+Use Existing db_connection.py
+Just import:
+from db_connection import db
+
+Start Coding Their Modules
+
+Example:
+
+students = db["students"]
+
+Collections will be automatically created when they insert data
