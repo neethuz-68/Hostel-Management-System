@@ -73,7 +73,7 @@ def delete_student():
     payments.delete_many({"student_id": sid})
     complaints.delete_many({"student_id": sid})
 
-    print("Student deleted correctly!")
+    print("Student deleted successfully!")
 
 
 # ➤ Search Student

@@ -16,7 +16,7 @@ def make_payment():
     payments.insert_one({
         "student_id": sid,
         "amount": amount,
-        "status": status
+        "status": status.lower()
     })
 
     print("✅ Payment recorded!")

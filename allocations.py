@@ -92,7 +92,6 @@ def allocate_room():
         print("❌ Room not found!")
         return
 
-    # ✅ Prevent duplicate allocation
     existing = allocations.find_one({"student_id": sid})
     if existing:
         print("❌ Student already has a room!")
