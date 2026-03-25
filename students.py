@@ -3,6 +3,10 @@ from pymongo.errors import DuplicateKeyError
 
 
 students = db["students"]
+rooms=db["rooms"]
+allocations = db["allocations"]
+payments = db["payments"]
+complaints = db["complaints"]
 
 students.create_index("student_id", unique=True)
 
@@ -48,12 +52,28 @@ def view_students():
 def delete_student():
     sid = input("Enter Student ID to delete: ")
 
-    result = students.delete_one({"student_id": sid})
+    student = students.find_one({"student_id": sid})
+    if not student:
+        print("❌ Student not found!")
+        return
 
-    if result.deleted_count > 0:
-        print("Student deleted successfully!")
-    else:
-        print("Student not found!")
+    # Find all allocations of this student
+    student_allocs = allocations.find({"student_id": sid})
+
+    for alloc in student_allocs:
+        rid = alloc["room_id"]
+
+        rooms.update_one(
+            {"room_id": rid},
+            {"$inc": {"occupied": -1}}
+        )
+
+    students.delete_one({"student_id": sid})
+    allocations.delete_many({"student_id": sid})
+    payments.delete_many({"student_id": sid})
+    complaints.delete_many({"student_id": sid})
+
+    print("Student deleted correctly!")
 
 
 # ➤ Search Student

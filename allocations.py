@@ -83,12 +83,11 @@ def allocate_room():
         return
 
     student = students.find_one({"student_id": sid})
-    room = rooms.find_one({"room_id": rid})
-
     if not student:
         print("❌ Student not found!")
         return
-
+    
+    room = rooms.find_one({"room_id": rid})
     if not room:
         print("❌ Room not found!")
         return
