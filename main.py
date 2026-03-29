@@ -132,6 +132,7 @@ def main():
                 elif ch == "3":
                     update_status()
                 elif ch == "4":
+                    print("Exiting.")
                     break
                 else:
                     print("Invalid choice!")
